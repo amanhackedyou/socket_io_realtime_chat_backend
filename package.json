@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "app.mjs",
+  "start": "node app.mjs",
   "license": "MIT",
   "dependencies": {
     "socket.io": "^4.5.4"
