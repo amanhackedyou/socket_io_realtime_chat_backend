@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 
-let port = process.env.PORT | 3000;
+let port = process.env.PORT || 3000;
+
 const io = new Server(port);
 
 io.on("connection", (socket) => {
@@ -21,6 +22,6 @@ io.on("connection", (socket) => {
   })
 });
 
-io.on("error", () => {console.log("Error");})
+console.log(`Server is running on port ${port}...`);
 
 // httpServer.listen(3000, () => {console.log("Server is running...")});
