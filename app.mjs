@@ -12,11 +12,11 @@ io.on("connection", (socket) => {
 
   users[socket.id] = socket.request.headers.username;
   io.emit("online_user_count", io.engine.clientsCount.toString())
-  // socket.broadcast.emit("users_connection_status", {
-  //   "count": io.engine.clientsCount.toString(),
-  //   "username": users[socket.id],
-  //   "type": "joined"
-  // });
+  socket.broadcast.emit("users_connection_status", {
+    "count": io.engine.clientsCount.toString(),
+    "username": users[socket.id],
+    "type": "joined"
+  });
 
   setTimeout(() => {
     io.to(socket.id).emit("incoming", {
