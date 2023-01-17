@@ -1,4 +1,4 @@
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 let port = process.env.PORT || 3000;
 
@@ -10,15 +10,15 @@ io.on("connection", (socket) => {
     return socket.leave(socket.id);
   }
   users[socket.id] = socket.request.headers.username;
-  socket.emit("online_users_count", socket.rooms.size.toString());
+  io.emit("online_users_count", io.engine.clientsCount.toString());
 
   socket.on("message", (data) => {
-    socket.broadcast.emit("incoming", data)
+    socket.broadcast.emit("incoming", data);
   })
 
   socket.on("disconnect", async () => {
     delete users[socket.id];
-    socket.emit("online_users_count", socket.rooms.size.toString());
+    io.emit("online_users_count", io.engine.clientsCount.toString());
   })
 });
 
