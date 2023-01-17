@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 
-const io = new Server(3000);
+let port = process.env.PORT | 3000;
+const io = new Server(port);
 
 io.on("connection", (socket) => {
   let users = {}
